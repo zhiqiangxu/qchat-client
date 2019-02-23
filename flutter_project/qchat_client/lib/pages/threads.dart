@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../io.dart';
+import '../model/event_bus.dart';
+import 'login.dart';
 
 class ThreadsPage extends StatefulWidget {
   @override
@@ -14,15 +17,29 @@ class _ThreadsPageState extends State<ThreadsPage> {
   @override
   void initState() {
     super.initState();
+
+    bus.on("qrpc_closed", (_){
+      Navigator.push(context, new MaterialPageRoute(builder: (context) {
+        return LoginPage();
+      }));
+    });
+    bus.on("qrpc_pushed", (frame) {
+      setState(() {
+        print('Got frame, refresh gui');
+      });
+    });
   }
 
 
   @override
   Widget build(BuildContext context) {
     
+    int itemCount = loginResponse != null ? 
+          loginResponse.csOfflineThreads?.length + loginResponse.offlineThreads.threads?.length
+          : 0;
     return ListView.separated(
       reverse: true,
-      itemCount: 1,
+      itemCount: itemCount,
       itemBuilder: (context, index) {
         print(index);
         return Container(

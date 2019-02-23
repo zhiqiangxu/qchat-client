@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../qrpc_client.dart';
+import '../model/qrpc_client.dart';
 import '../io.dart';
-import '../event_bus.dart';
+import '../model/event_bus.dart';
 import 'threads.dart';
 import 'dart:convert';
 
