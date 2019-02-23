@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../qrpc_client.dart';
 import '../io.dart';
+import 'threads.dart';
 import 'dart:convert';
 
 const login_title = "qchat login page";
@@ -19,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     loginStatus = "";
   }
 
-  void onPressed(String token) async {
+  void onPressed(BuildContext context, String token) async {
     var socketAddr = QrpcClient.getSocketAddr(token);
     var parts = socketAddr.split(":");
     var addr = parts[0];
@@ -38,7 +39,9 @@ class _LoginPageState extends State<LoginPage> {
       var resultObj = json.decode(resultStr);
       
       var resp = LoginResponse.fromJson(resultObj);
-      
+      Navigator.push(context, new MaterialPageRoute(builder: (context) {
+        return ThreadsPage();
+      }));
 
       setState(() {
         loginStatus = 'resultStr $resultStr resp ${json.encode(resp.toJson())}';  
@@ -77,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
           RaisedButton(
             child: Text("登陆"),
             onPressed: () {
-              onPressed(uidController.text);
+              onPressed(context, uidController.text);
             },
           ),
           Text(loginStatus)
