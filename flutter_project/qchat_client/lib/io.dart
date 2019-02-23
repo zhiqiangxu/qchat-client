@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'thread_and_msg.dart';
+import 'package:qrpc_client/qrpc_client.dart';
 
 part 'io.g.dart';
 
@@ -12,11 +13,15 @@ class LoginResponse {
 
   LoginResponse();
 
+  void onPush(QrpcFrame frame) {
+    print('frame $frame');
+  }
+
   factory LoginResponse.fromJson(Map<String, dynamic> json) => _$LoginResponseFromJson(json);
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 }
 
-LoginResponse login;
+LoginResponse loginResponse;
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class LoginInfo {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../qrpc_client.dart';
 import '../io.dart';
+import '../event_bus.dart';
 import 'threads.dart';
 import 'dart:convert';
 
@@ -43,6 +44,12 @@ class _LoginPageState extends State<LoginPage> {
         return ThreadsPage();
       }));
 
+      bus.on("qrpc_pushed", (frame) {
+        loginResponse?.onPush(frame);
+      });
+      bus.on("qrpc_closed", (_) {
+        loginResponse = null;
+      });
       setState(() {
         loginStatus = 'resultStr $resultStr resp ${json.encode(resp.toJson())}';  
       });
