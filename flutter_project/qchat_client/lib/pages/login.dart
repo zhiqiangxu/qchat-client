@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../qrpc_client.dart';
+import '../io.dart';
 import 'dart:convert';
 
 const login_title = "qchat login page";
@@ -34,10 +35,13 @@ class _LoginPageState extends State<LoginPage> {
     try {
       var result = await qrpcClient.request(CmdLogin, 0, {"app":"app", "device":"fuchsia", "token":token});
       var resultStr = utf8.decode(result.payload);
-      var obj = json.decode(resultStr);
-      print(obj);
+      var resultObj = json.decode(resultStr);
+      
+      var resp = LoginResponse.fromJson(resultObj);
+      
+
       setState(() {
-        loginStatus = resultStr;  
+        loginStatus = 'resultStr $resultStr resp ${json.encode(resp.toJson())}';  
       });
     } catch (e) {
       setState(() {
