@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'thread_and_msg.dart';
+import 'package:qchat_client/thread_and_msg.dart';
 import 'package:qrpc_client/qrpc_client.dart';
 
 part 'io.g.dart';

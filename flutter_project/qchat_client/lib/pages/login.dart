@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../model/qrpc_client.dart';
-import '../io.dart';
-import '../model/event_bus.dart';
-import 'threads.dart';
+import 'package:qchat_client/model/qrpc_client.dart';
+import 'package:qchat_client/io.dart';
+import 'package:qchat_client/model/event_bus.dart';
+import 'package:qchat_client/pages/threads.dart';
 import 'dart:convert';
 
 const login_title = "qchat login page";
@@ -39,8 +39,8 @@ class _LoginPageState extends State<LoginPage> {
       var resultStr = utf8.decode(result.payload);
       var resultObj = json.decode(resultStr);
       
-      var resp = LoginResponse.fromJson(resultObj);
-      Navigator.push(context, new MaterialPageRoute(builder: (context) {
+      loginResponse = LoginResponse.fromJson(resultObj);
+      Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) {
         return ThreadsPage();
       }));
 
@@ -48,10 +48,11 @@ class _LoginPageState extends State<LoginPage> {
         loginResponse?.onPush(frame);
       });
       bus.on("qrpc_closed", (_) {
+        print('qrpc_closed loginResponse = null');
         loginResponse = null;
       });
       setState(() {
-        loginStatus = 'resultStr $resultStr resp ${json.encode(resp.toJson())}';  
+        loginStatus = 'resultStr $resultStr resp ${json.encode(loginResponse)}';  
       });
     } catch (e) {
       setState(() {

@@ -1,5 +1,5 @@
 import 'package:qrpc_client/qrpc_client.dart';
-import 'event_bus.dart';
+import 'package:qchat_client/model/event_bus.dart';
 import 'dart:convert';
 
 class QrpcClient {
