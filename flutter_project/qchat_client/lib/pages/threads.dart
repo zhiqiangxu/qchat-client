@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:qchat_client/io.dart';
 import 'package:qchat_client/model/event_bus.dart';
 import 'package:qchat_client/pages/login.dart';
-import 'package:qchat_client/pages/thread_item.dart';
-import 'package:qchat_client/pages/csthread_item.dart';
+import 'package:qchat_client/widgets/thread_item.dart';
+import 'package:qchat_client/widgets/csthread_item.dart';
 
 class ThreadsPage extends StatefulWidget {
   @override
@@ -12,10 +12,7 @@ class ThreadsPage extends StatefulWidget {
 
 class _ThreadsPageState extends State<ThreadsPage> {
 
-  //下划线widget预定义以供复用。  
-  static const Widget _divider1=Divider(color: Colors.blue,);
-  static const Widget _divider2=Divider(color: Colors.green);
-
+  
   ScrollController _scrollController = new ScrollController();
 
   EventCallback on_close;

@@ -45,3 +45,15 @@ class OfflineThreadsResult {
   factory OfflineThreadsResult.fromJson(Map<String, dynamic> json) => _$OfflineThreadsResultFromJson(json);
   Map<String, dynamic> toJson() => _$OfflineThreadsResultToJson(this);
 }
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class ThreadMsgsResponse {
+
+  ThreadMsgs result;
+
+  ThreadMsgsResponse();
+
+
+  factory ThreadMsgsResponse.fromJson(Map<String, dynamic> json) => _$ThreadMsgsResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$ThreadMsgsResponseToJson(this);
+}

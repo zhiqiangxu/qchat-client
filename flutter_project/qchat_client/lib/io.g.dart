@@ -55,3 +55,13 @@ OfflineThreadsResult _$OfflineThreadsResultFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$OfflineThreadsResultToJson(
         OfflineThreadsResult instance) =>
     <String, dynamic>{'threads': instance.threads};
+
+ThreadMsgsResponse _$ThreadMsgsResponseFromJson(Map<String, dynamic> json) {
+  return ThreadMsgsResponse()
+    ..result = json['result'] == null
+        ? null
+        : ThreadMsgs.fromJson(json['result'] as Map<String, dynamic>);
+}
+
+Map<String, dynamic> _$ThreadMsgsResponseToJson(ThreadMsgsResponse instance) =>
+    <String, dynamic>{'result': instance.result};
