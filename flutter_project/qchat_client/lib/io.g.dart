@@ -30,6 +30,15 @@ Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
       'cs_status': instance.csStatus
     };
 
+NotifyData _$NotifyDataFromJson(Map<String, dynamic> json) {
+  return NotifyData()
+    ..type = json['type'] as int
+    ..data = json['data'] as String;
+}
+
+Map<String, dynamic> _$NotifyDataToJson(NotifyData instance) =>
+    <String, dynamic>{'type': instance.type, 'data': instance.data};
+
 LoginInfo _$LoginInfoFromJson(Map<String, dynamic> json) {
   return LoginInfo(
       uid: json['uid'] as String,
