@@ -8,7 +8,9 @@ part of 'thread_and_msg.dart';
 
 Thread _$ThreadFromJson(Map<String, dynamic> json) {
   return Thread()
-    ..peerThreadID = json['peer_thread_id'] as String
+    ..peer = json['peer'] == null
+        ? null
+        : Peer.fromJson(json['peer'] as Map<String, dynamic>)
     ..threadMsgs = json['thread_msgs'] == null
         ? null
         : ThreadMsgs.fromJson(json['thread_msgs'] as Map<String, dynamic>)
@@ -20,16 +22,31 @@ Thread _$ThreadFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ThreadToJson(Thread instance) => <String, dynamic>{
-      'peer_thread_id': instance.peerThreadID,
+      'peer': instance.peer,
       'thread_msgs': instance.threadMsgs,
       'msg_fetched': instance.msgFetched,
       'snap_msg': instance.snapMsg,
       'last_update': instance.lastUpdate
     };
 
+Peer _$PeerFromJson(Map<String, dynamic> json) {
+  return Peer()
+    ..uid = json['uid'] as String
+    ..csid = json['csid'] as String
+    ..groupID = json['group_i_d'] as String;
+}
+
+Map<String, dynamic> _$PeerToJson(Peer instance) => <String, dynamic>{
+      'uid': instance.uid,
+      'csid': instance.csid,
+      'group_i_d': instance.groupID
+    };
+
 CSThread _$CSThreadFromJson(Map<String, dynamic> json) {
   return CSThread()
-    ..peerThreadID = json['peer_thread_id'] as String
+    ..peer = json['peer'] == null
+        ? null
+        : Peer.fromJson(json['peer'] as Map<String, dynamic>)
     ..threadMsgs = json['thread_msgs'] == null
         ? null
         : ThreadMsgs.fromJson(json['thread_msgs'] as Map<String, dynamic>)
@@ -43,7 +60,7 @@ CSThread _$CSThreadFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$CSThreadToJson(CSThread instance) => <String, dynamic>{
-      'peer_thread_id': instance.peerThreadID,
+      'peer': instance.peer,
       'thread_msgs': instance.threadMsgs,
       'msg_fetched': instance.msgFetched,
       'snap_msg': instance.snapMsg,

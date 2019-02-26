@@ -4,8 +4,7 @@ part 'thread_and_msg.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Thread {
-  @JsonKey(name: "peer_thread_id")
-  String peerThreadID;
+  Peer peer;
   ThreadMsgs threadMsgs;
   bool msgFetched;
   Msg snapMsg;
@@ -15,6 +14,23 @@ class Thread {
 
   factory Thread.fromJson(Map<String, dynamic> json) => _$ThreadFromJson(json);
   Map<String, dynamic> toJson() => _$ThreadToJson(this);
+}
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class Peer {
+  String uid;
+  String csid;
+  String groupID;
+
+  Peer();
+
+  String id() {
+    if (uid!="") return uid;
+    if (csid!="") return "cs:$csid";
+    return 'g:$groupID';
+  }
+  factory Peer.fromJson(Map<String, dynamic> json) => _$PeerFromJson(json);
+  Map<String, dynamic> toJson() => _$PeerToJson(this);
 }
 
 @JsonSerializable(fieldRename: FieldRename.snake)

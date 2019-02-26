@@ -15,7 +15,7 @@ class ThreadItem  extends StatelessWidget {
           children: <Widget>[
             new Container(
               margin: const EdgeInsets.only(right: 16.0),
-              child: new CircleAvatar(child: new Text(thread.peerThreadID),),
+              child: new CircleAvatar(child: new Text(thread.peer.id()),),
             ),
             new Expanded(
               child: new Column(
